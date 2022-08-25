@@ -11,6 +11,9 @@ foto_prueba = fr.load_image_file('foto2.jpg')
 foto_control = cv2.cvtColor(foto_control, cv2.COLOR_BGR2RGB)
 foto_prueba = cv2.cvtColor(foto_prueba, cv2.COLOR_BGR2RGB)
 
+
+
+
 # find face
 cara_place_A = fr.face_locations(foto_control)[0]
 cara_encode_A = fr.face_encodings(foto_control)[0]
@@ -26,6 +29,10 @@ cv2.rectangle(foto_prueba, (cara_place_B[3], cara_place_B[0]),(cara_place_B[2], 
 # compare
 
 resultado = fr.compare_faces([cara_encode_A], cara_encode_B)
+
+distancia = fr.face_distance([cara_encode_A], cara_encode_B)
+
+cv2.putText(foto_prueba, f'{resultado} {distancia.round(2)}',(50, 50), cv2.FONT_HERSHEY_COMPLEXY, 1,(0,255,0),2)
 
 
 
